@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import Combine
 
 class InviteFriendsViewController: UIViewController {
 
     weak var router: NavigationRoutable?
+    private var disposables = Set<AnyCancellable>()
     
     // MARK: - Initializer
     
@@ -35,7 +37,6 @@ class InviteFriendsViewController: UIViewController {
         homeButton.backgroundColor = .black
         homeButton.setTitle("Home", for: .normal)
         homeButton.setTitleColor(UIColor.white, for: .normal)
-        homeButton.addTarget(self, action: #selector(self.homeButtonTapped), for: .touchUpInside)
         self.view.addSubview(homeButton)
         homeButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -44,11 +45,10 @@ class InviteFriendsViewController: UIViewController {
             homeButton.widthAnchor.constraint(equalToConstant: 150),
             homeButton.heightAnchor.constraint(equalToConstant: 50)
         ])
+        homeButton.tapPublisher
+            .sink { [weak self] _ in
+                self?.router?.dismissPresentedViewControllerAndRoute(to: RouteData(path: .home), animated: true, completion: nil)
+            }.store(in: &disposables)
     }
   
-    // MARK: - Actions
-    
-    @objc func homeButtonTapped(_ sender: UIButton) {
-        router?.dismissPresentedViewControllerAndRoute(to: RouteData(path: .home), animated: true, completion: nil)
-    }
 }

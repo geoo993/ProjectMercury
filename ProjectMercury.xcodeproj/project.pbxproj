@@ -24,6 +24,8 @@
 		C792FCA92586C9400078BFCB /* CashBackRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C792FCA82586C9400078BFCB /* CashBackRouter.swift */; };
 		C792FCAC2586C9980078BFCB /* CashBackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C792FCAB2586C9980078BFCB /* CashBackViewController.swift */; };
 		C792FCAF2586C9C20078BFCB /* LostMoneyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C792FCAE2586C9C20078BFCB /* LostMoneyViewController.swift */; };
+		C7CFA11925A12B3000EFE411 /* EventPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CFA11825A12B3000EFE411 /* EventPublisher.swift */; };
+		C7CFA12125A12FCD00EFE411 /* UIControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7CFA12025A12FCD00EFE411 /* UIControl.swift */; };
 		C7E3F94725A118350045E491 /* AppPathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E3F94625A118350045E491 /* AppPathTests.swift */; };
 		C7E3F95625A1189F0045E491 /* MockRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E3F95525A1189F0045E491 /* MockRouter.swift */; };
 		C7F24BB3258588030031A989 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F24BB2258588030031A989 /* AppDelegate.swift */; };
@@ -72,6 +74,8 @@
 		C792FCA82586C9400078BFCB /* CashBackRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashBackRouter.swift; sourceTree = "<group>"; };
 		C792FCAB2586C9980078BFCB /* CashBackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CashBackViewController.swift; sourceTree = "<group>"; };
 		C792FCAE2586C9C20078BFCB /* LostMoneyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LostMoneyViewController.swift; sourceTree = "<group>"; };
+		C7CFA11825A12B3000EFE411 /* EventPublisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventPublisher.swift; sourceTree = "<group>"; };
+		C7CFA12025A12FCD00EFE411 /* UIControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIControl.swift; sourceTree = "<group>"; };
 		C7E3F94425A118350045E491 /* ProjectMercuryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ProjectMercuryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C7E3F94625A118350045E491 /* AppPathTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPathTests.swift; sourceTree = "<group>"; };
 		C7E3F94825A118350045E491 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -204,6 +208,15 @@
 			path = CashBack;
 			sourceTree = "<group>";
 		};
+		C7CFA11725A12B1F00EFE411 /* UIControl */ = {
+			isa = PBXGroup;
+			children = (
+				C7CFA11825A12B3000EFE411 /* EventPublisher.swift */,
+				C7CFA12025A12FCD00EFE411 /* UIControl.swift */,
+			);
+			path = UIControl;
+			sourceTree = "<group>";
+		};
 		C7E3F94525A118350045E491 /* ProjectMercuryTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -314,6 +327,7 @@
 		C7F24BEA25858D930031A989 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				C7CFA11725A12B1F00EFE411 /* UIControl */,
 				C7F24BEB25858DA40031A989 /* Array+Ext.swift */,
 			);
 			path = Extensions;
@@ -437,6 +451,7 @@
 				C7F24BD325858AD90031A989 /* AppUIConfigurator.swift in Sources */,
 				C7F24BFF258595A20031A989 /* DeepLinkHandler.swift in Sources */,
 				C7F24BB3258588030031A989 /* AppDelegate.swift in Sources */,
+				C7CFA12125A12FCD00EFE411 /* UIControl.swift in Sources */,
 				C728A48825A105070000C98C /* PocketsViewController.swift in Sources */,
 				C792FC852586C44D0078BFCB /* NavigationController.swift in Sources */,
 				C792FCAC2586C9980078BFCB /* CashBackViewController.swift in Sources */,
@@ -458,6 +473,7 @@
 				C728A47C25A0F3730000C98C /* CashbackDetailViewController.swift in Sources */,
 				C7F24BCC25858A850031A989 /* AppDelegateStateTransitionable.swift in Sources */,
 				C7F24BE025858BBC0031A989 /* RouteData.swift in Sources */,
+				C7CFA11925A12B3000EFE411 /* EventPublisher.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

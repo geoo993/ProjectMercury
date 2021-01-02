@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import Combine
 
 class CashBackViewController: UIViewController {
 
     weak var router: NavigationRoutable?
+    private var disposables = Set<AnyCancellable>()
     
     init(router: NavigationRoutable) {
         self.router = router
@@ -33,7 +35,6 @@ class CashBackViewController: UIViewController {
         detailButton.backgroundColor = .black
         detailButton.setTitle("Cashback Detail", for: .normal)
         detailButton.setTitleColor(UIColor.white, for: .normal)
-        detailButton.addTarget(self, action: #selector(self.cashbackDetailButtonTapped), for: .touchUpInside)
         self.view.addSubview(detailButton)
         detailButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -42,13 +43,16 @@ class CashBackViewController: UIViewController {
             detailButton.widthAnchor.constraint(equalToConstant: 150),
             detailButton.heightAnchor.constraint(equalToConstant: 50)
         ])
+        detailButton.tapPublisher
+            .sink { [weak self] _ in
+                self?.router?.route(to: RouteData(path: .cashbackDetail), animated: true, completion: nil)
+            }.store(in: &disposables)
         
         // Invite button
         let inviteButton = UIButton(type: .roundedRect)
         inviteButton.backgroundColor = .black
         inviteButton.setTitle("Invite", for: .normal)
         inviteButton.setTitleColor(UIColor.white, for: .normal)
-        inviteButton.addTarget(self, action: #selector(self.inviteButtonTapped), for: .touchUpInside)
         self.view.addSubview(inviteButton)
         inviteButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -57,6 +61,10 @@ class CashBackViewController: UIViewController {
             inviteButton.widthAnchor.constraint(equalToConstant: 100),
             inviteButton.heightAnchor.constraint(equalToConstant: 50)
         ])
+        inviteButton.tapPublisher
+            .sink { [weak self] _ in
+                self?.router?.route(to: RouteData(path: .inviteFriends), animated: true, completion: nil)
+            }.store(in: &disposables)
     }
     
     
@@ -67,15 +75,5 @@ class CashBackViewController: UIViewController {
         tabBarItem.image = UIImage(systemName: "bag.badge.plus")?.withRenderingMode(.alwaysTemplate)
         tabBarItem.selectedImage = UIImage(systemName: "bag.fill.badge.plus")?.withRenderingMode(.alwaysOriginal)
     }
-    
-    // MARK: - Actions
-    
-    @objc func cashbackDetailButtonTapped(_ sender: UIButton) {
-        router?.route(to: RouteData(path: .cashbackDetail), animated: true, completion: nil)
-    }
-    
-    @objc func inviteButtonTapped(_ sender: UIButton) {
-        router?.route(to: RouteData(path: .inviteFriends), animated: true, completion: nil)
-    }
-    
+ 
 }

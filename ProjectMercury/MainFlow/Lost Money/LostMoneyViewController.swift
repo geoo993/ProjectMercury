@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import Combine
 
 class LostMoneyViewController: UIViewController {
 
     weak var router: NavigationRoutable?
+    private var disposables = Set<AnyCancellable>()
     
     // MARK: - Initializer
     
@@ -35,7 +37,6 @@ class LostMoneyViewController: UIViewController {
         detailButton.backgroundColor = .black
         detailButton.setTitle("Lost Money Detail", for: .normal)
         detailButton.setTitleColor(UIColor.white, for: .normal)
-        detailButton.addTarget(self, action: #selector(self.lostMoneyDetailButtonTapped), for: .touchUpInside)
         self.view.addSubview(detailButton)
         detailButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -44,13 +45,16 @@ class LostMoneyViewController: UIViewController {
             detailButton.widthAnchor.constraint(equalToConstant: 150),
             detailButton.heightAnchor.constraint(equalToConstant: 50)
         ])
+        detailButton.tapPublisher
+            .sink { [weak self] _ in
+                self?.router?.route(to: RouteData(path: .lostMoneyDetail), animated: true, completion: nil)
+            }.store(in: &disposables)
         
         // Invite button
         let inviteButton = UIButton(type: .roundedRect)
         inviteButton.backgroundColor = .black
         inviteButton.setTitle("Invite", for: .normal)
         inviteButton.setTitleColor(UIColor.white, for: .normal)
-        inviteButton.addTarget(self, action: #selector(self.inviteButtonTapped), for: .touchUpInside)
         self.view.addSubview(inviteButton)
         inviteButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -59,6 +63,10 @@ class LostMoneyViewController: UIViewController {
             inviteButton.widthAnchor.constraint(equalToConstant: 100),
             inviteButton.heightAnchor.constraint(equalToConstant: 50)
         ])
+        inviteButton.tapPublisher
+            .sink { [weak self] _ in
+                self?.router?.route(to: RouteData(path: .inviteFriends), animated: true, completion: nil)
+            }.store(in: &disposables)
     }
     
     // MARK: - UI Setup
@@ -67,15 +75,5 @@ class LostMoneyViewController: UIViewController {
         title = "Lost Money"
         tabBarItem.image = UIImage(systemName: "star")?.withRenderingMode(.alwaysTemplate)
         tabBarItem.selectedImage = UIImage(systemName: "star.fill")?.withRenderingMode(.alwaysOriginal)
-    }
-    
-    // MARK: - Actions
-    
-    @objc func lostMoneyDetailButtonTapped(_ sender: UIButton) {
-        router?.route(to: RouteData(path: .lostMoneyDetail), animated: true, completion: nil)
-    }
-    
-    @objc func inviteButtonTapped(_ sender: UIButton) {
-        router?.route(to: RouteData(path: .inviteFriends), animated: true, completion: nil)
     }
 }

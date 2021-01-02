@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import Combine
 
 class LostMoneyDetailViewController: UIViewController {
 
     weak var router: NavigationRoutable?
+    private var disposables = Set<AnyCancellable>()
     
     // MARK: - Initializer
     
@@ -35,7 +37,6 @@ class LostMoneyDetailViewController: UIViewController {
         pocketsButton.backgroundColor = .black
         pocketsButton.setTitle("Pockets", for: .normal)
         pocketsButton.setTitleColor(UIColor.white, for: .normal)
-        pocketsButton.addTarget(self, action: #selector(self.pocketsButtonTapped), for: .touchUpInside)
         self.view.addSubview(pocketsButton)
         pocketsButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -44,12 +45,10 @@ class LostMoneyDetailViewController: UIViewController {
             pocketsButton.widthAnchor.constraint(equalToConstant: 150),
             pocketsButton.heightAnchor.constraint(equalToConstant: 50)
         ])
-    }
-    
-    // MARK: - Actions
-    
-    @objc func pocketsButtonTapped(_ sender: UIButton) {
-        router?.route(to: RouteData(path: .pockets), animated: true, completion: nil)
+        pocketsButton.tapPublisher
+            .sink { [weak self] _ in
+                self?.router?.route(to: RouteData(path: .pockets), animated: true, completion: nil)
+            }.store(in: &disposables)
     }
 
 }
